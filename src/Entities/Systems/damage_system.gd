@@ -1,4 +1,7 @@
-class_name DamageSystem extends Node
+class_name DamageSystem extends RefCounted
+
+func _init():
+	pass
 
 func apply_damage(entity: Entity, amount: int) -> void:
 	var healt_component = entity.get_component("Health")

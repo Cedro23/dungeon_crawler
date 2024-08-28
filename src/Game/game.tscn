@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cubepd5eo7f1j"]
+[gd_scene load_steps=10 format=3 uid="uid://cubepd5eo7f1j"]
 
 [ext_resource type="Texture2D" uid="uid://bu71qkpwgfcs8" path="res://assets/images/rogues.png" id="1_k83r7"]
 [ext_resource type="Script" path="res://src/Game/game_manager.gd" id="1_n4ddi"]
@@ -7,8 +7,6 @@
 [ext_resource type="Script" path="res://src/Entities/Components/health_component.gd" id="4_rue13"]
 [ext_resource type="Script" path="res://src/Entities/Components/attack_component.gd" id="5_6yuyk"]
 [ext_resource type="Script" path="res://src/Entities/Components/defense_component.gd" id="6_hvyy8"]
-[ext_resource type="Script" path="res://src/Entities/Systems/attack_system.gd" id="7_u42io"]
-[ext_resource type="Script" path="res://src/Entities/Systems/damage_system.gd" id="8_ifqo8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oncei"]
 atlas = ExtResource("1_k83r7")
@@ -64,11 +62,3 @@ attack_damage = 3
 
 [node name="Defense" type="Node" parent="Slime/Components"]
 script = ExtResource("6_hvyy8")
-
-[node name="Systems" type="Node" parent="."]
-
-[node name="Attack" type="Node" parent="Systems"]
-script = ExtResource("7_u42io")
-
-[node name="Damage" type="Node" parent="Systems"]
-script = ExtResource("8_ifqo8")

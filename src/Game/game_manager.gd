@@ -4,11 +4,11 @@ extends Node2D
 @onready var player: Character = $Player
 @onready var slime: Entity = $Slime
 
-@onready var attack_system: AttackSystem = $Systems/Attack
+var attack_system: AttackSystem 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	attack_system = AttackSystem.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
