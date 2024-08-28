@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bu71qkpwgfcs8" path="res://assets/images/rogues.png" id="1_k83r7"]
 [ext_resource type="Script" path="res://src/Game/game_manager.gd" id="1_n4ddi"]
-[ext_resource type="Script" path="res://src/Entities/entity.gd" id="3_rfgf2"]
+[ext_resource type="Script" path="res://src/Entities/character.gd" id="3_q1ix3"]
 [ext_resource type="Texture2D" uid="uid://bbamp5hkt7uk2" path="res://assets/images/monsters.png" id="4_eucfh"]
 [ext_resource type="Script" path="res://src/Entities/Components/health_component.gd" id="4_rue13"]
 [ext_resource type="Script" path="res://src/Entities/Components/attack_component.gd" id="5_6yuyk"]
@@ -24,7 +24,7 @@ script = ExtResource("1_n4ddi")
 [node name="Player" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_oncei")
 centered = false
-script = ExtResource("3_rfgf2")
+script = ExtResource("3_q1ix3")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(16, 16)
@@ -49,7 +49,7 @@ armor = 2
 position = Vector2(64, 0)
 texture = SubResource("AtlasTexture_81kdt")
 centered = false
-script = ExtResource("3_rfgf2")
+script = ExtResource("3_q1ix3")
 
 [node name="Components" type="Node" parent="Slime"]
 
