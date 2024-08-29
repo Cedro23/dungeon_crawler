@@ -1,5 +1,4 @@
-class_name GameManager
-extends Node2D
+class_name DungeonManager extends Node2D
 
 @onready var player: Character = $Player
 @onready var slime: Entity = $Slime
