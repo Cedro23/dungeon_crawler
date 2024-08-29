@@ -13,8 +13,8 @@ func attack(attacker: Entity, target: Entity) -> void:
 
 	var tot_damage: int = attack_component.attack_damage - target_def
 	
-	var atk_desc: String = "%s attacks %s" % [attacker.name, target.name, tot_damage]
-	atk_desc += " for %s tot_damage." % tot_damage if tot_damage > 0 else " but does no tot_damage."
+	var atk_desc: String = "%s attacks %s" % [attacker.entity_name, target.entity_name]
+	atk_desc += " for %s damage." % tot_damage if tot_damage > 0 else " but does no tot_damage."
 
 
 	print(atk_desc)

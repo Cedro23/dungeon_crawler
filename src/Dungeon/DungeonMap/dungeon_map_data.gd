@@ -15,6 +15,7 @@ func _init(map_width: int, map_height: int, _player: Entity) -> void:
 	width = map_width
 	height = map_height
 	player = _player
+	entities = []
 	_setup_tiles()
 
 func _setup_tiles():
@@ -30,6 +31,10 @@ func get_tile(grid_position: Vector2i) -> Tile:
 	if tile_index == -1:
 		return null
 	return tiles[tile_index]
+
+func get_tile_xy(x: int, y: int) -> Tile:
+	var grid_position := Vector2i(x, y)
+	return get_tile(grid_position)
 
 func grid_to_index(grid_position: Vector2i) -> int:
 	if not is_in_bounds(grid_position):

@@ -1,9 +1,22 @@
 class_name Entity extends Sprite2D
 
+enum EntityType {
+	CORPSE,
+	INTERACTABLE,
+	OBSTACLE,
+	ITEM,
+	ACTOR,
+	}
+
 var grid_position: Vector2i:
 	set(value):
 		grid_position = value
 		position = Grid.grid_to_world(grid_position)
+
+var type: EntityType:
+	set(value):
+		type = value
+		z_index = type
 
 var _definition: EntityDefinition
 var entity_name: String
@@ -27,10 +40,11 @@ func get_component(component_name: String) -> Component:
 func set_entity(entity_definition: EntityDefinition) -> void:
 	_definition = entity_definition
 
-	entity_name = entity_definition.name
-	is_blocking = entity_definition.is_blocking
-	texture = entity_definition.texture
-	modulate = entity_definition.color
+	type = _definition.type
+	entity_name = _definition.name
+	is_blocking = _definition.is_blocking
+	texture = _definition.texture
+	modulate = _definition.color
 
 	for comp_definition in entity_definition.components:
 		var component: Component = Components.definition_to_component(comp_definition)

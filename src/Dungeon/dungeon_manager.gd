@@ -17,13 +17,25 @@ func _ready():
 	remove_child(camera)
 	player.add_child(camera)
 	map.generate(player)
-	# map.update_fov(player.grid_position)
+	map.update_fov(player.grid_position)
 
 func _physics_process(_delta: float) -> void:
 	var action: Action = input_handler.get_action(player)
 	if action:
-		# var previous_player_position: Vector2i = player.grid_position
+		var previous_player_position: Vector2i = player.grid_position
 		action.perform()
-		# _handle_ais_turn()
-		# if player.grid_position != previous_player_position:
-			# map.update_fov(player.grid_position)
+		_handle_ais_turn()
+		if player.grid_position != previous_player_position:
+			map.update_fov(player.grid_position)
+
+
+func _handle_ais_turn() -> void:
+	for entity in map.map_data.get_actors():
+		var heatlh_comp: HealthComponent = entity.get_component("Health")
+		if not heatlh_comp or not heatlh_comp.is_alive():
+			continue
+			
+		print("%s is wondering when it will get to take a real turn." % entity.entity_name)
+		# var ai: AIComponent = entity.get_component("AI")
+		# if ai:
+		# 	ai.perform()

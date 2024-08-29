@@ -14,7 +14,10 @@ class_name DungeonGenerator extends Node
 
 var _rng := RandomNumberGenerator.new()
 
-const entity_types = {}
+const entity_types = {
+	"slime": preload("res://assets/definitions/entities/monsters/slime.tres"),
+	"goblin": preload("res://assets/definitions/entities/monsters/goblin.tres"),
+}
 
 func _ready():
 	_rng.randomize()
@@ -107,9 +110,9 @@ func _place_entities(dungeon: DungeonMapData, room: Rect2i) -> void:
 		if can_place:
 			var new_entity: Entity
 			if _rng.randf() < 0.8:
-				# new_entity = Entity.new(dungeon, new_entity_position, entity_types.orc)
+				new_entity = Entity.new(dungeon, new_entity_position, entity_types.slime)
 				pass
 			else:
-				# new_entity = Entity.new(dungeon, new_entity_position, entity_types.troll)
+				new_entity = Entity.new(dungeon, new_entity_position, entity_types.goblin)
 				pass
-			# dungeon.entities.append(new_entity)
+			dungeon.entities.append(new_entity)

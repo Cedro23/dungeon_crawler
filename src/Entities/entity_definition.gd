@@ -7,7 +7,7 @@ class_name EntityDefinition extends Resource
 
 @export_category("Mechanics")
 @export var is_blocking: bool = true
-# @export var type: Entity.EntityType = Entity.EntityType.ACTOR
+@export var type: Entity.EntityType = Entity.EntityType.ACTOR
 
 @export_category("Components")
 @export var components: Array[ComponentDefinition]

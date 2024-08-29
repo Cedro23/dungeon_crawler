@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=12 format=3 uid="uid://be4towbxpocn6"]
+
+[ext_resource type="Script" path="res://src/Entities/entity_definition.gd" id="1_72ogo"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/health_component_definition.gd" id="1_b7q3r"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/attack_component_definition.gd" id="2_eknt2"]
+[ext_resource type="Texture2D" uid="uid://bbamp5hkt7uk2" path="res://assets/images/monsters.png" id="2_yysem"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/move_component_definition.gd" id="3_f0ue7"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/defense_component_definition.gd" id="4_v7f8s"]
+
+[sub_resource type="Resource" id="Resource_257h4"]
+script = ExtResource("1_b7q3r")
+max_health = 16
+
+[sub_resource type="Resource" id="Resource_c7755"]
+script = ExtResource("2_eknt2")
+attack_damage = 4
+
+[sub_resource type="Resource" id="Resource_oeo7p"]
+script = ExtResource("3_f0ue7")
+
+[sub_resource type="Resource" id="Resource_fodsg"]
+script = ExtResource("4_v7f8s")
+armor = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh8fc"]
+atlas = ExtResource("2_yysem")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_72ogo")
+name = "Goblin"
+texture = SubResource("AtlasTexture_lh8fc")
+color = Color(1, 1, 1, 1)
+is_blocking = true
+type = 3
+components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_257h4"), SubResource("Resource_c7755"), SubResource("Resource_oeo7p"), SubResource("Resource_fodsg")])
