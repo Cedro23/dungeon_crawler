@@ -1,5 +1,4 @@
-class_name Grid
-extends Object
+class_name Grid extends Object
 
 const tile_size := Vector2i(32, 32)
 

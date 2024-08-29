@@ -1,64 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://cubepd5eo7f1j"]
+[gd_scene load_steps=4 format=3 uid="uid://cubepd5eo7f1j"]
 
 [ext_resource type="Script" path="res://src/Dungeon/dungeon_manager.gd" id="1_ihs3x"]
-[ext_resource type="Texture2D" uid="uid://bu71qkpwgfcs8" path="res://assets/images/rogues.png" id="2_1gs2t"]
-[ext_resource type="Script" path="res://src/Entities/character.gd" id="3_6sv5b"]
-[ext_resource type="Script" path="res://src/Entities/Components/health_component.gd" id="4_jmenl"]
-[ext_resource type="Script" path="res://src/Entities/Components/attack_component.gd" id="5_8ba80"]
-[ext_resource type="Script" path="res://src/Entities/Components/defense_component.gd" id="6_4r2d4"]
-[ext_resource type="Texture2D" uid="uid://bbamp5hkt7uk2" path="res://assets/images/monsters.png" id="7_xgagp"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oncei"]
-atlas = ExtResource("2_1gs2t")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_81kdt"]
-atlas = ExtResource("7_xgagp")
-region = Rect2(0, 64, 32, 32)
+[ext_resource type="Script" path="res://src/Dungeon/DungeonMap/dungeon_map.gd" id="8_jme7p"]
+[ext_resource type="Script" path="res://src/Dungeon/DungeonMap/dungeon_generator.gd" id="9_gumx2"]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_ihs3x")
 
-[node name="Player" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_oncei")
-centered = false
-script = ExtResource("3_6sv5b")
+[node name="DungeonMap" type="Node2D" parent="."]
+script = ExtResource("8_jme7p")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="DungeonGenerator" type="Node" parent="DungeonMap"]
+script = ExtResource("9_gumx2")
+
+[node name="Tiles" type="Node2D" parent="DungeonMap"]
+
+[node name="Entities" type="Node2D" parent="DungeonMap"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(16, 16)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-
-[node name="Components" type="Node" parent="Player"]
-
-[node name="Health" type="Node" parent="Player/Components"]
-script = ExtResource("4_jmenl")
-max_health = 20
-defense = null
-
-[node name="Attack" type="Node" parent="Player/Components"]
-script = ExtResource("5_8ba80")
-
-[node name="Defense" type="Node" parent="Player/Components"]
-script = ExtResource("6_4r2d4")
-armor = 2
-
-[node name="Slime" type="Sprite2D" parent="."]
-position = Vector2(64, 0)
-texture = SubResource("AtlasTexture_81kdt")
-centered = false
-script = ExtResource("3_6sv5b")
-
-[node name="Components" type="Node" parent="Slime"]
-
-[node name="Health" type="Node" parent="Slime/Components"]
-script = ExtResource("4_jmenl")
-max_health = 10
-defense = null
-
-[node name="Attack" type="Node" parent="Slime/Components"]
-script = ExtResource("5_8ba80")
-attack_damage = 3
-
-[node name="Defense" type="Node" parent="Slime/Components"]
-script = ExtResource("6_4r2d4")

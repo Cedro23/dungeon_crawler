@@ -1,11 +1,12 @@
-class_name HealthComponent extends Node
+class_name HealthComponent extends Component
 
-@export var max_health: int = 30
+var max_health: int
 var current_health: int
-@export var defense: int = 0
 
-func _ready():
-	current_health = max_health
+func _init(_name: StringName, definition: HealthComponentDefinition) -> void:
+	super(_name)
+	max_health = definition.max_health
+	current_health = definition.max_health
 
 func is_alive() -> bool:
 	return current_health > 0

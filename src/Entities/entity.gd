@@ -6,16 +6,37 @@ var grid_position: Vector2i:
 		grid_position = value
 		position = Grid.grid_to_world(grid_position)
 
-@export var components: Dictionary = {}
-@export var is_blocking: bool = true
+var _definition: EntityDefinition
+var entity_name: String
+var is_blocking: bool
 
-func _ready():
-	grid_position = Grid.world_to_grid(position)
-	for component in get_node("Components").get_children():
-		add_component(component.name, component)
+var components: Dictionary = {}
 
-func add_component(component_name: String, component: Node):
+func _init(start_position: Vector2i, entity_definition: EntityDefinition) -> void:
+	centered = false
+	grid_position = start_position
+	_definition = entity_definition
+	set_entity(entity_definition)
+
+func _add_component(component_name: String, component: Component) -> void:
 	components[component_name] = component
 
-func get_component(component_name: String) -> Node:
+func get_component(component_name: String) -> Component:
 	return components.get(component_name)
+
+func set_entity(entity_definition: EntityDefinition) -> void:
+	entity_name = entity_definition.name
+	is_blocking = entity_definition.is_blocking
+	texture = entity_definition.texture
+	modulate = entity_definition.color
+
+	for comp_definition in entity_definition.components:
+		var component: Component = Components.definition_to_component(comp_definition)
+		_add_component(component.name, component)
+
+func is_alive() -> bool:
+	var health_component = get_component("Health")
+	if health_component:
+		return health_component.is_alive()
+	return false
+	#return get_component("Health").is_alive()
