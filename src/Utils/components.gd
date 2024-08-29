@@ -7,8 +7,6 @@ static func definition_to_component(definition: ComponentDefinition) -> Componen
 		return AttackComponent.new("Attack", definition)
 	elif definition is DefenseComponentDefinition:
 		return DefenseComponent.new("Defense", definition)
-	elif definition is InteractableComponentDefinition:
-		return InteractableComponent.new("Interactable", definition)
 	elif definition is MoveComponentDefinition:
 		return MoveComponent.new("Move")
 	elif definition is AIComponentDefinition:

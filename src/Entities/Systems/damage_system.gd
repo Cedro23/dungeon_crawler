@@ -1,22 +1,38 @@
 class_name DamageSystem extends RefCounted
 
-func _init():
-	pass
+var attacker: Entity
+
+func _init(_attacker: Entity):
+	attacker = _attacker
 
 func apply_damage(entity: Entity, amount: int) -> void:
 	var healt_component = entity.get_component("Health")
 	if healt_component:
 		healt_component.take_damage(amount)
-		print("%s's HP: %d" % [entity.entity_name, healt_component.current_health])
 		if not healt_component.is_alive():
-			_on_entity_dead(entity)
+			if attacker == entity.map_data.player:
+				_on_entity_killed_by_player(entity)
+			else:
+				_on_entity_death(entity)
 
-func _on_entity_dead(entity: Entity):
+func _on_entity_killed_by_player(entity: Entity):
+	print("%s killed %s." % [attacker.entity_name, entity.entity_name])
+	# TODO: give loop and exp to player
+	process_entity_death(entity)
+
+
+func _on_entity_death(entity: Entity):
 	if entity == entity.map_data.player:
+		# Player killed by entity
 		print("YOU DIED!")
 		SignalBus.player_died.emit()
-	else:
-		print("%s died." % entity.entity_name)
+	elif entity.visible: 
+		# Entity kille by entity and visible by the player
+		print("%s was killed by %s." % [entity.entity_name, attacker.entity_name])
+	
+	process_entity_death(entity)
+
+func process_entity_death(entity: Entity):
 	entity.entity_name = "Remains of %s" % entity.entity_name
 	entity.type = Entity.EntityType.CORPSE
 	entity.is_blocking = false

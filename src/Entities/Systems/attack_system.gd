@@ -1,7 +1,9 @@
 class_name AttackSystem extends RefCounted
 
-func _init():
-	pass
+var player: Entity
+
+func _init(_player: Entity):
+	player = _player
 
 # Calculates the amount of damage then sends it to the damage system
 func attack(attacker: Entity, target: Entity) -> void:
@@ -19,6 +21,5 @@ func attack(attacker: Entity, target: Entity) -> void:
 
 	print(atk_desc)
 		
-	var damage_system = DamageSystem.new()
+	var damage_system = DamageSystem.new(attacker)
 	damage_system.apply_damage(target, tot_damage)
-		
