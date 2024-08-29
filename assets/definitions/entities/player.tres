@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=12 format=3 uid="uid://d3vmscc1sqrbg"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=13 format=3 uid="uid://d3vmscc1sqrbg"]
 
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/health_component_definition.gd" id="1_lypqs"]
 [ext_resource type="Script" path="res://src/Entities/entity_definition.gd" id="1_wkyta"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/attack_component_definition.gd" id="2_xlvxo"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/defense_component_definition.gd" id="3_ryyc1"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/move_component_definition.gd" id="4_k8cu1"]
+[ext_resource type="Texture2D" uid="uid://vvhqmy8gsgmu" path="res://assets/resources/bones_death_texture.tres" id="5_ga1le"]
 
 [sub_resource type="Resource" id="Resource_ixgwq"]
 script = ExtResource("1_lypqs")
@@ -31,6 +32,8 @@ script = ExtResource("1_wkyta")
 name = "Player"
 texture = SubResource("AtlasTexture_bo8ej")
 color = Color(0.977548, 0.87245, 0.523117, 1)
+death_texture = ExtResource("5_ga1le")
+death_color = Color(1, 1, 1, 1)
 is_blocking = true
 type = 3
 components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_qvasc"), SubResource("Resource_ywdsd"), SubResource("Resource_n36ll")])

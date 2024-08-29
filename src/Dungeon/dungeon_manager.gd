@@ -7,12 +7,9 @@ var player: Entity
 @onready var map: DungeonMap = $DungeonMap
 @onready var camera: Camera2D = $Camera2D
 
-var attack_system: AttackSystem 
-var move_system: MoveSystem
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	move_system = MoveSystem.new()
 	player = Entity.new(null, Vector2i.ZERO, player_definition)
 	remove_child(camera)
 	player.add_child(camera)
@@ -35,7 +32,6 @@ func _handle_ais_turn() -> void:
 		if not heatlh_comp or not heatlh_comp.is_alive():
 			continue
 			
-		print("%s is wondering when it will get to take a real turn." % entity.entity_name)
-		# var ai: AIComponent = entity.get_component("AI")
-		# if ai:
-		# 	ai.perform()
+		var ai: AIComponent = entity.get_component("AI")
+		if ai:
+			ai.get_action(entity, player).perform()

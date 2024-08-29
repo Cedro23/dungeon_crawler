@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=12 format=3 uid="uid://be4towbxpocn6"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=15 format=3 uid="uid://be4towbxpocn6"]
 
 [ext_resource type="Script" path="res://src/Entities/entity_definition.gd" id="1_72ogo"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/health_component_definition.gd" id="1_b7q3r"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bbamp5hkt7uk2" path="res://assets/images/monsters.png" id="2_yysem"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/move_component_definition.gd" id="3_f0ue7"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/defense_component_definition.gd" id="4_v7f8s"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/ai_component_definition.gd" id="5_62ge6"]
+[ext_resource type="Texture2D" uid="uid://vvhqmy8gsgmu" path="res://assets/resources/bones_death_texture.tres" id="6_gdn25"]
 
 [sub_resource type="Resource" id="Resource_257h4"]
 script = ExtResource("1_b7q3r")
@@ -15,12 +17,16 @@ max_health = 16
 script = ExtResource("2_eknt2")
 attack_damage = 4
 
-[sub_resource type="Resource" id="Resource_oeo7p"]
-script = ExtResource("3_f0ue7")
-
 [sub_resource type="Resource" id="Resource_fodsg"]
 script = ExtResource("4_v7f8s")
 armor = 1
+
+[sub_resource type="Resource" id="Resource_3hfpv"]
+script = ExtResource("5_62ge6")
+type = 1
+
+[sub_resource type="Resource" id="Resource_ulqf7"]
+script = ExtResource("3_f0ue7")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lh8fc"]
 atlas = ExtResource("2_yysem")
@@ -31,6 +37,8 @@ script = ExtResource("1_72ogo")
 name = "Goblin"
 texture = SubResource("AtlasTexture_lh8fc")
 color = Color(1, 1, 1, 1)
+death_texture = ExtResource("6_gdn25")
+death_color = Color(1, 1, 1, 1)
 is_blocking = true
 type = 3
-components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_257h4"), SubResource("Resource_c7755"), SubResource("Resource_oeo7p"), SubResource("Resource_fodsg")])
+components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_257h4"), SubResource("Resource_c7755"), SubResource("Resource_fodsg"), SubResource("Resource_3hfpv"), SubResource("Resource_ulqf7")])

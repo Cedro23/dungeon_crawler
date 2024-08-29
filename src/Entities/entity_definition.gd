@@ -4,6 +4,9 @@ class_name EntityDefinition extends Resource
 @export var name: String = "Unnamed entity"
 @export var texture: AtlasTexture
 @export_color_no_alpha var color: Color = Color.WHITE
+@export var death_texture: AtlasTexture
+@export_color_no_alpha var death_color: Color = Color.WHITE
+
 
 @export_category("Mechanics")
 @export var is_blocking: bool = true

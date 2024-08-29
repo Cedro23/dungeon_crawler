@@ -36,7 +36,7 @@ script = ExtResource("7_6bvas")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(16, 16)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="Debug" type="Node" parent="."]

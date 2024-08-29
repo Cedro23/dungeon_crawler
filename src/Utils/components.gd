@@ -11,5 +11,7 @@ static func definition_to_component(definition: ComponentDefinition) -> Componen
 		return InteractableComponent.new("Interactable", definition)
 	elif definition is MoveComponentDefinition:
 		return MoveComponent.new("Move")
-
+	elif definition is AIComponentDefinition:
+		return AIComponent.new("AI", definition)
+		
 	return null

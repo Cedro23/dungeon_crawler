@@ -21,6 +21,10 @@ var type: EntityType:
 var _definition: EntityDefinition
 var entity_name: String
 var is_blocking: bool
+
+var death_texture: AtlasTexture
+var death_color: Color
+
 var map_data: DungeonMapData
 
 var components: Dictionary = {}
@@ -45,6 +49,8 @@ func set_entity(entity_definition: EntityDefinition) -> void:
 	is_blocking = _definition.is_blocking
 	texture = _definition.texture
 	modulate = _definition.color
+	death_texture = _definition.death_texture
+	death_color = _definition.death_color
 
 	for comp_definition in entity_definition.components:
 		var component: Component = Components.definition_to_component(comp_definition)

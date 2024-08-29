@@ -12,7 +12,13 @@ func apply_damage(entity: Entity, amount: int) -> void:
 			_on_entity_dead(entity)
 
 func _on_entity_dead(entity: Entity):
-	print("%s died." % entity.entity_name)
+	if entity == entity.map_data.player:
+		print("YOU DIED!")
+		SignalBus.player_died.emit()
+	else:
+		print("%s died." % entity.entity_name)
 	entity.entity_name = "Remains of %s" % entity.entity_name
 	entity.type = Entity.EntityType.CORPSE
 	entity.is_blocking = false
+	entity.texture = entity.death_texture
+	entity.modulate = entity.death_color

@@ -57,7 +57,7 @@ func generate(player: Entity):
 
 		rooms.append(new_room)
 
-	# dungeon.setup_pathfinding()
+	dungeon.setup_pathfinding()
 	return dungeon
 
 func _carve_tile(dungeon: DungeonMapData, x: int, y: int) -> void:
