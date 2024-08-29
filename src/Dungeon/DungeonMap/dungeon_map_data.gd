@@ -9,9 +9,9 @@ var width: int
 var height: int
 var tiles: Array[Tile]
 var entities: Array[Entity]
-var player: Character
+var player: Entity
 
-func _init(map_width: int, map_height: int, _player: Character) -> void:
+func _init(map_width: int, map_height: int, _player: Entity) -> void:
 	width = map_width
 	height = map_height
 	player = _player

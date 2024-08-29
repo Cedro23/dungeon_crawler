@@ -13,8 +13,5 @@ func apply_damage(entity: Entity, amount: int) -> void:
 
 func _on_entity_dead(entity: Entity):
 	print("%s died." % entity.name)
-	entity.name = "Broken %s" % entity.name
-	if entity is Character:
-		entity.name = "Remains of %s" % entity.name
-	print("%s" % entity.name)
+	entity.name = "Remains of %s" % entity.name
 	entity.is_blocking = false

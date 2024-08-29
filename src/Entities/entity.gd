@@ -1,5 +1,4 @@
-class_name Entity
-extends Sprite2D
+class_name Entity extends Sprite2D
 
 var grid_position: Vector2i:
 	set(value):

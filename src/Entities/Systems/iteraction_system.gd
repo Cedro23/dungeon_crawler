@@ -3,7 +3,7 @@ class_name IteractionSystem extends RefCounted
 func _init():
 	pass
 
-func interact(actor: Character, entity: Entity) -> void:
+func interact(actor: Entity, entity: Entity) -> void:
 	var interact_component = entity.get_component("Interactable")
 	if interact_component:
 		if interact_component.pickable:

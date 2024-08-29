@@ -9,7 +9,7 @@ var map_data: DungeonMapData
 @onready var dungeon_generator: DungeonGenerator = $DungeonGenerator
 # @onready var field_of_view: FieldOfView = $FieldOfView
 
-func generate(player: Character) -> void:
+func generate(player: Entity) -> void:
 	map_data = dungeon_generator.generate(player)
 	_place_tiles()
 	_place_entities()

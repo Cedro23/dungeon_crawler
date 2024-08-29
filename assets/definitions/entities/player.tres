@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=10 format=3 uid="uid://d3vmscc1sqrbg"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=12 format=3 uid="uid://d3vmscc1sqrbg"]
 
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/health_component_definition.gd" id="1_lypqs"]
 [ext_resource type="Script" path="res://src/Entities/Definitions/entity_definition.gd" id="1_wkyta"]
 [ext_resource type="Texture2D" uid="uid://bu71qkpwgfcs8" path="res://assets/images/rogues.png" id="2_51nqw"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/attack_component_definition.gd" id="2_xlvxo"]
 [ext_resource type="Script" path="res://src/Entities/Components/Definitions/defense_component_definition.gd" id="3_ryyc1"]
+[ext_resource type="Script" path="res://src/Entities/Components/Definitions/move_component_definition.gd" id="4_k8cu1"]
 
 [sub_resource type="Resource" id="Resource_ixgwq"]
 script = ExtResource("1_lypqs")
@@ -18,6 +19,9 @@ attack_damage = 5
 script = ExtResource("3_ryyc1")
 armor = 3
 
+[sub_resource type="Resource" id="Resource_717rx"]
+script = ExtResource("4_k8cu1")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bo8ej"]
 atlas = ExtResource("2_51nqw")
 region = Rect2(96, 0, 32, 32)
@@ -28,4 +32,4 @@ name = "Player"
 texture = SubResource("AtlasTexture_bo8ej")
 color = Color(0.977548, 0.87245, 0.523117, 1)
 is_blocking = true
-components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_qvasc"), SubResource("Resource_ywdsd")])
+components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_qvasc"), SubResource("Resource_ywdsd"), SubResource("Resource_717rx")])

@@ -9,5 +9,7 @@ static func definition_to_component(definition: ComponentDefinition) -> Componen
 		return DefenseComponent.new("Defense", definition)
 	elif definition is InteractableComponentDefinition:
 		return InteractableComponent.new("Interactable", definition)
-		
+	elif definition is MoveComponentDefinition:
+		return MoveComponent.new("Move")
+
 	return null

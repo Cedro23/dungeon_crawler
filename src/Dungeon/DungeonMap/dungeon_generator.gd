@@ -19,7 +19,7 @@ const entity_types = {}
 func _ready():
 	_rng.randomize()
 
-func generate(player: Character):
+func generate(player: Entity):
 	var dungeon: DungeonMapData = DungeonMapData.new(map_width, map_height, player)
 	dungeon.entities.append(player)
 

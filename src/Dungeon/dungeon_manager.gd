@@ -2,15 +2,17 @@ class_name DungeonManager extends Node2D
 
 const player_definition: EntityDefinition = preload("res://assets/definitions/entities/player.tres")
 
-var player: Character
+var player: Entity
 @onready var map: DungeonMap = $DungeonMap
 @onready var camera: Camera2D = $Camera2D
 
 var attack_system: AttackSystem 
+var move_system: MoveSystem
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = Character.new(Vector2i.ZERO, player_definition)
+	move_system = MoveSystem.new()
+	player = Entity.new(Vector2i.ZERO, player_definition)
 	remove_child(camera)
 	player.add_child(camera)
 	map.generate(player)
@@ -49,3 +51,6 @@ func _process(_delta: float) -> void:
 		pass
 	elif Input.is_action_just_pressed("pause"):
 		get_tree().quit()
+
+	if player.get_component("Move"):
+		move_system.move(player, offset)
