@@ -8,13 +8,14 @@ var grid_position: Vector2i:
 var _definition: EntityDefinition
 var entity_name: String
 var is_blocking: bool
+var map_data: DungeonMapData
 
 var components: Dictionary = {}
 
-func _init(start_position: Vector2i, entity_definition: EntityDefinition) -> void:
+func _init(_map_data: DungeonMapData, start_position: Vector2i, entity_definition: EntityDefinition) -> void:
 	centered = false
 	grid_position = start_position
-	_definition = entity_definition
+	map_data = _map_data
 	set_entity(entity_definition)
 
 func _add_component(component_name: String, component: Component) -> void:
@@ -24,6 +25,8 @@ func get_component(component_name: String) -> Component:
 	return components.get(component_name)
 
 func set_entity(entity_definition: EntityDefinition) -> void:
+	_definition = entity_definition
+
 	entity_name = entity_definition.name
 	is_blocking = entity_definition.is_blocking
 	texture = entity_definition.texture

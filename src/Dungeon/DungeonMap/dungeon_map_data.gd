@@ -39,6 +39,12 @@ func grid_to_index(grid_position: Vector2i) -> int:
 func is_in_bounds(grid_position: Vector2i) -> bool:
 	return (0 <= grid_position.x and grid_position.x < width and 0 <= grid_position.y and grid_position.y < height)
 
+func get_blocking_entity_at_location(grid_position: Vector2i) -> Entity:
+	for entity in entities:
+		if entity.is_blocking and entity.grid_position == grid_position:
+			return entity
+	return null
+
 func get_actors() -> Array[Entity]:
 	var actors: Array[Entity] = []
 	for entity in entities:

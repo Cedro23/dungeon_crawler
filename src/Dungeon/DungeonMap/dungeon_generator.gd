@@ -46,7 +46,7 @@ func generate(player: Entity):
 
 		if rooms.is_empty():
 			player.grid_position = new_room.get_center()
-			# player.map_data = dungeon
+			player.map_data = dungeon
 		else:
 			_tunnel_between(dungeon, rooms.back().get_center(), new_room.get_center())
 
