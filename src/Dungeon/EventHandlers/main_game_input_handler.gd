@@ -19,10 +19,13 @@ func get_action(player: Entity) -> Action:
 			var offset: Vector2i = directions[direction]
 			action = BumpAction.new(player, offset.x, offset.y)
 
+	if Input.is_action_just_pressed("interact"):
+		pass
+
 	if Input.is_action_just_pressed("wait"):
 		action = WaitAction.new(player)
 	
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("back"):
 		action = EscapeAction.new(player)
 	
 	return action

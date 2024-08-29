@@ -1,7 +1,7 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dtj1wbgyw2ek2"]
 
-[ext_resource type="Texture2D" uid="uid://ddkdjt8fufd3t" path="res://assets/images/tiles.png" id="1_l5675"]
+[ext_resource type="Texture2D" uid="uid://dw5ego0ymkrh7" path="res://assets/images/blood_spatter.png" id="1_icewa"]
 
 [resource]
-atlas = ExtResource("1_l5675")
-region = Rect2(0, 704, 32, 32)
+atlas = ExtResource("1_icewa")
+region = Rect2(0, 0, 32, 32)
