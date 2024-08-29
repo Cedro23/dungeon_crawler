@@ -26,6 +26,6 @@ region = Rect2(96, 0, 32, 32)
 script = ExtResource("1_wkyta")
 name = "Player"
 texture = SubResource("AtlasTexture_bo8ej")
-color = Color(0, 1, 1, 1)
+color = Color(0.977548, 0.87245, 0.523117, 1)
 is_blocking = true
 components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_qvasc"), SubResource("Resource_ywdsd")])

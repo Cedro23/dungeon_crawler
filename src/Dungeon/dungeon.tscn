@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cubepd5eo7f1j"]
+[gd_scene load_steps=5 format=3 uid="uid://cubepd5eo7f1j"]
 
 [ext_resource type="Script" path="res://src/Dungeon/dungeon_manager.gd" id="1_ihs3x"]
+[ext_resource type="Script" path="res://src/Utils/debug.gd" id="4_vku7l"]
 [ext_resource type="Script" path="res://src/Dungeon/DungeonMap/dungeon_map.gd" id="8_jme7p"]
 [ext_resource type="Script" path="res://src/Dungeon/DungeonMap/dungeon_generator.gd" id="9_gumx2"]
 
@@ -21,3 +22,6 @@ script = ExtResource("9_gumx2")
 offset = Vector2(16, 16)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+
+[node name="Debug" type="Node" parent="."]
+script = ExtResource("4_vku7l")
