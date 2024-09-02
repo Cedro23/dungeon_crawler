@@ -12,19 +12,19 @@
 script = ExtResource("1_lypqs")
 max_health = 30
 
-[sub_resource type="Resource" id="Resource_qvasc"]
-script = ExtResource("2_xlvxo")
-base_attack_damage = Vector2i(4, 6)
-base_crit_chance = 0.2
-base_crit_multiplier = 1.5
-base_nb_of_attacks = 2
-
 [sub_resource type="Resource" id="Resource_ywdsd"]
 script = ExtResource("3_ryyc1")
 armor = 15
 
 [sub_resource type="Resource" id="Resource_n36ll"]
 script = ExtResource("4_k8cu1")
+
+[sub_resource type="Resource" id="Resource_n8l0g"]
+script = ExtResource("2_xlvxo")
+base_attack_damage = Vector2i(4, 6)
+base_crit_chance = 0.2
+base_crit_multiplier = 1.5
+base_nb_of_attacks = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bo8ej"]
 atlas = ExtResource("2_51nqw")
@@ -39,4 +39,4 @@ death_texture = ExtResource("5_ga1le")
 death_color = Color(1, 1, 1, 1)
 is_blocking = true
 type = 3
-components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_qvasc"), SubResource("Resource_ywdsd"), SubResource("Resource_n36ll")])
+components = Array[Resource("res://src/Entities/Components/Definitions/component_definition.gd")]([SubResource("Resource_ixgwq"), SubResource("Resource_ywdsd"), SubResource("Resource_n36ll"), SubResource("Resource_n8l0g")])

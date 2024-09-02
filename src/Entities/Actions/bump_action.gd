@@ -7,6 +7,9 @@ func perform() -> void:
 		push_warning("Entity %s has no Move component." % entity.name)
 		return
 
+	if offset.x != 0:
+		entity.flip_h = offset.x > 0
+
 	if get_map_data().get_blocking_entity_at_location(dest):
 		MeleeAction.new(entity, offset.x, offset.y).perform()
 	else:
