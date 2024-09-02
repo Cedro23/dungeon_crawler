@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwpp3x0d1c0h3"]
 
-[ext_resource type="FontFile" uid="uid://clt1j6arrrqr4" path="res://assets/fonts/kenney/Kenney Pixel.ttf" id="1_84vny"]
+[ext_resource type="FontFile" uid="uid://b0l72vgoeslin" path="res://assets/fonts/kenney/Kenney Pixel Square.ttf" id="1_qslss"]
 [ext_resource type="Script" path="res://src/UI/damage_number.gd" id="2_c53ht"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ivrnh"]
-font = ExtResource("1_84vny")
+font = ExtResource("1_qslss")
+font_size = 8
 font_color = Color(1, 0.611765, 0, 0)
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
