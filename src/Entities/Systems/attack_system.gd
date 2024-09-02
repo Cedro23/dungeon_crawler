@@ -15,7 +15,7 @@ func attack(attacker: Entity, target: Entity) -> void:
 	var target_def = defense_component.armor if defense_component else 0
 	
 	for i in range(attack_component.base_nb_of_attacks):
-		if target.get_component("Health").is_alive() == false:
+		if target.is_alive() == false:
 			return
 		var is_crit = _rng.randf() <= attack_component.base_crit_chance
 		var tot_damage: int = _calc_damage(attack_component, is_crit) - target_def
@@ -37,3 +37,6 @@ func _calc_damage(attack_comp: AttackComponent, is_crit: bool) -> int:
 	if is_crit:
 		damage *= attack_comp.base_crit_multiplier
 	return damage
+
+func _display_damage(value: int, travel: Vector2, duration: float, spread: float, is_crit: bool):
+	pass

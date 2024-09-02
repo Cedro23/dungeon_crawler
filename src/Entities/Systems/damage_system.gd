@@ -9,7 +9,7 @@ func apply_damage(entity: Entity, amount: int) -> void:
 	var healt_component = entity.get_component("Health")
 	if healt_component:
 		healt_component.take_damage(amount)
-		if not healt_component.is_alive():
+		if not entity.is_alive():
 			if attacker == entity.map_data.player:
 				_on_entity_killed_by_player(entity)
 			else:
