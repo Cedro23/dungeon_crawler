@@ -15,7 +15,7 @@ script = ExtResource("1_ihs3x")
 [node name="InputHandler" type="Node" parent="."]
 script = ExtResource("2_w6u0r")
 
-[node name="MainGameInputHandler" type="Node" parent="InputHandler"]
+[node name="DungeonInputHandler" type="Node" parent="InputHandler"]
 script = ExtResource("3_mwp7w")
 
 [node name="GameOverInputHandler" type="Node" parent="InputHandler"]

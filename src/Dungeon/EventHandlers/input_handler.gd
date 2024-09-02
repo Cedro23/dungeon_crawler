@@ -1,14 +1,14 @@
 class_name InputHandler extends Node
 
 enum InputHandlers {
-	MAIN_GAME,
+	DUNGEON,
 	GAME_OVER
 }
 
 @export var start_input_handler: InputHandlers
 
 @onready var input_handlers_node := {
-	InputHandlers.MAIN_GAME: $MainGameInputHandler,
+	InputHandlers.DUNGEON: $DungeonInputHandler,
 	InputHandlers.GAME_OVER: $GameOverInputHandler
 }
 
