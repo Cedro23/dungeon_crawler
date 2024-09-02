@@ -1,10 +1,14 @@
 class_name AttackSystem extends RefCounted
 
+var dmg_number_scene = preload("res://src/UI/damage_number.tscn")
+var root: Node
+
 var player: Entity
 var _rng: RandomNumberGenerator
 
 func _init(_player: Entity):
 	player = _player
+	root = player.get_tree().current_scene
 	_rng = RandomNumberGenerator.new()
 
 # Calculates the amount of damage then sends it to the damage system
@@ -24,7 +28,7 @@ func attack(attacker: Entity, target: Entity) -> void:
 		atk_desc += " for %s damage." % tot_damage if tot_damage > 0 else " but does no tot_damage."
 		atk_desc += " (CRIT!)"  if is_crit else ""
 
-		print(atk_desc)
+		_display_damage_number(tot_damage, target.position, 1.0, 10.0, is_crit)
 			
 		var damage_system = DamageSystem.new(attacker)
 		damage_system.apply_damage(target, tot_damage)
@@ -35,8 +39,10 @@ func _calc_damage(attack_comp: AttackComponent, is_crit: bool) -> int:
 	var max_dmg: int = attack_comp.base_attack_damage.y
 	var damage: int = _rng.randi_range(min_dmg, max_dmg)
 	if is_crit:
-		damage *= attack_comp.base_crit_multiplier
+		damage *= roundi(attack_comp.base_crit_multiplier)
 	return damage
 
-func _display_damage(value: int, travel: Vector2, duration: float, spread: float, is_crit: bool):
-	pass
+func _display_damage_number(amount: int, travel: Vector2, duration: float, spread: float, is_crit: bool):
+	var new_scene: Node = dmg_number_scene.instantiate()
+	root.add_child(new_scene)
+	new_scene.display(amount, travel, duration, spread, is_crit)
