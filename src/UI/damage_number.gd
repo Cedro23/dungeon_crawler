@@ -12,7 +12,7 @@ func display(amount: int, start_pos: Vector2, direction: Vector2, duration: floa
 	
 	
 	position = start_pos
-	var movement = direction / 2
+	var movement = (direction / 2).rotated(_rng.randf_range(-1, 1))
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + movement, duration/3 if is_crit else duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
