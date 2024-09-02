@@ -16,15 +16,12 @@ func apply_damage(entity: Entity, amount: int) -> void:
 				_on_entity_death(entity)
 
 func _on_entity_killed_by_player(entity: Entity):
-	print("%s killed %s." % [attacker.entity_name, entity.entity_name])
 	# TODO: give loop and exp to player
 	process_entity_death(entity)
 
 
 func _on_entity_death(entity: Entity):
 	if entity == entity.map_data.player:
-		# Player killed by entity
-		print("YOU DIED!")
 		SignalBus.player_died.emit()
 	elif entity.visible: 
 		# Entity kille by entity and visible by the player
