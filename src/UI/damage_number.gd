@@ -6,13 +6,13 @@ var _rng := RandomNumberGenerator.new()
 func _ready():
 	_rng.randomize()
 
-func display(amount: int, start_pos: Vector2, duration: float, spread: float, is_crit: bool):
+func display(amount: int, start_pos: Vector2, direction: Vector2, duration: float, is_crit: bool):
 	z_index = 10
 	text = str(amount) if amount > 0 else "Miss"
 	
 	
 	position = start_pos
-	var movement = Vector2(0, -10).rotated(_rng.randf_range(-spread/2, spread/2))
+	var movement = direction / 2
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + movement, duration/3 if is_crit else duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)

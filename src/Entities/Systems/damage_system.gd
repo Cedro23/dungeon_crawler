@@ -31,6 +31,7 @@ func _on_entity_death(entity: Entity):
 
 func process_entity_death(entity: Entity):
 	entity.entity_name = "Remains of %s" % entity.entity_name
+	entity.map_data.unregister_blocking_entity(entity)
 	entity.type = Entity.EntityType.CORPSE
 	entity.is_blocking = false
 	entity.texture = entity.death_texture

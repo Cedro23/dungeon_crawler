@@ -23,7 +23,7 @@ func attack(attacker: Entity, target: Entity) -> void:
 		var is_crit = _rng.randf() <= attack_component.base_crit_chance
 		var raw_dmg: int = _calc_raw_damage(attack_component, is_crit)
 		var mitigated_dmg: int = _calc_mitigated_damage(raw_dmg, target_def)
-		_display_damage_number(mitigated_dmg, target.position, 1.0, 10.0, is_crit)
+		_display_damage_number(mitigated_dmg, target.position, attacker.position, 1.0, is_crit)
 			
 		var damage_system = DamageSystem.new(attacker)
 		damage_system.apply_damage(target, mitigated_dmg)
@@ -49,7 +49,8 @@ func _calc_mitigated_damage(raw_dmg: int, armor: int) -> int:
 
 	return mitigated_dmg
 
-func _display_damage_number(amount: int, start_pos: Vector2, duration: float, spread: float, is_crit: bool):
+func _display_damage_number(amount: int, start_pos: Vector2, attacker_pos: Vector2, duration: float, is_crit: bool):
 	var new_scene: Node = dmg_number_scene.instantiate()
 	root.add_child(new_scene)
-	new_scene.display(amount, start_pos, duration, spread, is_crit)
+	var direction = start_pos - attacker_pos
+	new_scene.display(amount, start_pos, direction,  duration, is_crit)
