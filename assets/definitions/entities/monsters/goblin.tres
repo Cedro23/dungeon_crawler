@@ -15,7 +15,7 @@ max_health = 16
 
 [sub_resource type="Resource" id="Resource_fodsg"]
 script = ExtResource("4_v7f8s")
-armor = 1
+armor = 5
 
 [sub_resource type="Resource" id="Resource_3hfpv"]
 script = ExtResource("5_62ge6")
