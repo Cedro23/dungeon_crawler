@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwpp3x0d1c0h3"]
+
+[ext_resource type="FontFile" uid="uid://clt1j6arrrqr4" path="res://assets/fonts/kenney/Kenney Pixel.ttf" id="1_84vny"]
+[ext_resource type="Script" path="res://src/UI/damage_number.gd" id="2_c53ht"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivrnh"]
+font = ExtResource("1_84vny")
+font_color = Color(1, 0.611765, 0, 0)
+
+[node name="DamageNumber" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+label_settings = SubResource("LabelSettings_ivrnh")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_c53ht")
