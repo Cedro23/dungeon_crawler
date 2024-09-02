@@ -10,7 +10,7 @@ func display(amount: int, start_pos: Vector2, duration: float, spread: float, is
 	
 	
 	position = start_pos
-	var movement = Vector2(0, -7).rotated(randf_range(-spread, spread))
+	var movement = Vector2(0, -7).rotated(randf_range(-spread/2, spread/2))
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + movement, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
