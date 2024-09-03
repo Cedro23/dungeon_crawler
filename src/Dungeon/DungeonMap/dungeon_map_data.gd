@@ -1,8 +1,8 @@
 class_name DungeonMapData extends RefCounted
 
 const tile_types = {
-	"floor": preload("res://assets/definitions/tiles/floor.tres"),
-	"wall": preload("res://assets/definitions/tiles/wall.tres"),
+	TileTypes.TYPES.WALL: preload("res://assets/definitions/tiles/wall.tres"),
+	TileTypes.TYPES.FLOOR: preload("res://assets/definitions/tiles/floor.tres"),
 }
 
 const entity_pathfinding_weight = 10.0
@@ -26,7 +26,7 @@ func _setup_tiles():
 	for y in range(height):
 		for x in range(width):
 			var tile_position := Vector2i(x, y)
-			var tile = Tile.new(tile_position, tile_types.wall)
+			var tile = Tile.new(tile_position, tile_types.get(TileTypes.TYPES.WALL))
 			tiles.append(tile)
 
 func get_tile(grid_position: Vector2i) -> Tile:

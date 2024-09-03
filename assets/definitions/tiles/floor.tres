@@ -12,5 +12,6 @@ script = ExtResource("1_wpr5e")
 texture = SubResource("AtlasTexture_7gyd3")
 color_lit = Color(1, 1, 1, 1)
 color_dark = Color(0.381703, 0.381703, 0.381703, 1)
+type = 1
 is_walkable = true
 is_transparent = true

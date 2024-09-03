@@ -1,6 +1,7 @@
 class_name Tile extends Sprite2D
 
 var _definition: TileDefinition
+var type: TileTypes.TYPES
 
 var is_explored: bool = false:
 	set(value):
@@ -25,9 +26,13 @@ func set_tile_type(tile_definition: TileDefinition) -> void:
 	_definition = tile_definition
 	texture = _definition.texture
 	modulate = _definition.color_dark
+	type = _definition.type
 
 func is_walkable() -> bool:
 	return _definition.is_walkable
 
 func is_transparent() -> bool:
 	return _definition.is_transparent
+
+func is_not_wall() -> bool:
+	return type != TileTypes.TYPES.WALL

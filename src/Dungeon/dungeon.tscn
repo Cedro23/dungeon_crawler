@@ -23,9 +23,13 @@ script = ExtResource("4_ge8lu")
 
 [node name="DungeonMap" type="Node2D" parent="."]
 script = ExtResource("8_jme7p")
+fov_radius = 1000
 
 [node name="DungeonGenerator" type="Node" parent="DungeonMap"]
 script = ExtResource("9_gumx2")
+map_width = 25
+map_height = 25
+extra_connector_chance = 5
 
 [node name="FieldOfView" type="Node" parent="DungeonMap"]
 script = ExtResource("7_6bvas")
@@ -36,7 +40,7 @@ script = ExtResource("7_6bvas")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(16, 16)
-zoom = Vector2(3, 3)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="Debug" type="Node" parent="."]
