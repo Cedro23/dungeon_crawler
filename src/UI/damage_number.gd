@@ -19,9 +19,10 @@ func display(amount: int, start_pos: Vector2, direction: Vector2, duration: floa
 	tween.parallel().tween_property(self, "label_settings:font_color:a", 1.0, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 	if is_crit:
+		text += "!"
 		modulate = Color.RED
 		pivot_offset = size / 2
-		tween.parallel().tween_property(self, "scale", scale * 2, duration/3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(self, "scale", scale * 1.5, duration/3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	await tween.finished
 	queue_free()
