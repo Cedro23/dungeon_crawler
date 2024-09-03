@@ -7,8 +7,10 @@ class_name DungeonGenerator extends Node
 @export_category("Rooms RNG")
 @export var nb_room_tries: int = 200
 @export var extra_connector_chance: int = 5
-@export var room_extra_size: int = 0
+@export var min_room_size: int = 1
+@export var max_room_size: int = 3
 @export var winding_percent: int = 0
+@export var distance_between_connectors: int = 2
 
 
 @export_category("Monsters RNG")
@@ -31,7 +33,6 @@ func _ready():
 	_bounds = Rect2i(0, 0, map_width, map_height).grow(-1)
 
 func generate(player: Entity):
-	print("Started dungeon generation.")
 	if map_width % 2 == 0 or map_height % 2 == 0:
 		push_error("The stage must be odd-sized.")
 
@@ -44,7 +45,6 @@ func generate(player: Entity):
 		_regions[i].resize(map_height)
 
 	_add_rooms()
-	print("%d rooms created." % len(_rooms))
 
 	# Fill in all of the empty space with mazes.
 	for x in range(1, _bounds.size.x + 1, 2):
@@ -53,19 +53,16 @@ func generate(player: Entity):
 			if _dungeon.get_tile_xy(x, y).type != TileTypes.TYPES.WALL:
 				continue
 			_grow_maze(pos)
-	print("Mazes grown.")
 
 	_connect_regions()
-	# _remove_dead_ends()
+	_remove_dead_ends()
 
 	# Select starting room for player
-	# _rooms[_rng.randi() % len(_rooms)].get_center()
-	player.grid_position = Vector2i(map_width / 2, map_height / 2)
+	player.grid_position = _rooms[_rng.randi() % len(_rooms)].get_center()
 	player.map_data = _dungeon
 
 
 	_dungeon.setup_pathfinding()
-	print("Finished dungeon generation.")
 	return _dungeon
 
 
@@ -74,7 +71,7 @@ func _grow_maze(start: Vector2i) -> void:
 	var last_direction = null
 
 	_start_region()
-	_carve(start)
+	_carve(start, TileTypes.TYPES.FLOOR)
 
 	cells.append(start)
 	while not cells.is_empty():
@@ -96,8 +93,8 @@ func _grow_maze(start: Vector2i) -> void:
 			else:
 				direction = unmade_cells[randi() % len(unmade_cells)]
 
-			_carve(cell + direction)
-			_carve(cell + direction * 2)
+			_carve(cell + direction, TileTypes.TYPES.FLOOR)
+			_carve(cell + direction * 2, TileTypes.TYPES.FLOOR)
 
 			cells.append(cell + direction * 2)
 			last_direction = direction
@@ -115,38 +112,42 @@ func _set_tile(pos: Vector2i, tile_type: TileTypes.TYPES) -> void:
 func _connect_regions() -> void:
 	# Find all the tiles that can connect 2 or more regions.
 	var connector_regions: Dictionary = {} # <Vector2i, UniqueArray[int]>
-	for y in _bounds.size.y:
-		for x in _bounds.size.x:
+	for x in _bounds.size.x  + 1:
+		for y in _bounds.size.y + 1:
 			var pos = Vector2i(x, y)
 			if _dungeon.get_tile_xy(x, y).type != TileTypes.TYPES.WALL:
 				continue
 
-			var regions: Array[int] = [] # UniqueArray[int]
+			var regions: Array = [] # UniqueArray[int]
 			for dir in Direction.CARDINAL.values():
 				var dest = pos + dir
 				var region = _regions[dest.x][dest.y]
 				if region != null:
 					regions.append(region)
+				regions = ArrayUtils.array_unique(regions)
 
 			if len(regions) < 2:
 				continue
 			
 			connector_regions[pos] = regions
+	
 
 	var connectors: Array = connector_regions.keys() # PackedVector2Array ?
-
+	
 	# Keep track of which regions have been merged.
 	# This maps an original region indew to the one it has been merged to.
 	var merged: Dictionary = {} # Dictionary<int, int>
-	var open_regions: Array[int] = [] # UniqueArray[int]
+	var open_regions: Array = [] # UniqueArray[int]
 	
 	for i in range(_current_region + 1):
 		merged[i] = i
 		open_regions.append(i)
+	open_regions = ArrayUtils.array_unique(open_regions)
 
 	while len(open_regions) > 1:
+
 		# Vector2i chosen randomly in connectors
-		var connector = connectors[_rng.randi() % len(connectors)]
+		var connector = connectors[_rng.randi() % len(connectors)]	
 
 		# Carve the connection
 		_add_junction(connector)
@@ -174,14 +175,15 @@ func _connect_regions() -> void:
 		var new_connectors: Array[Vector2i] = []
 		for con in connectors:
 			# Don't allow connectors right next to each other.
-			if Grid.distance_to(con, connector) > 2:
+			if Grid.distance_to(con, connector) > distance_between_connectors:
 				new_connectors.append(con)
 				continue
 			
 			# If the connector no longer connects different regions, remove it.
 			var regions = []
-			for region in ArrayUtils.array_unique(connector_regions[con]):
+			for region in connector_regions[con]:
 				regions.append(merged[region])
+			regions = ArrayUtils.array_unique(regions)
 			
 			if len(regions) > 1:
 				new_connectors.append(con)
@@ -193,23 +195,12 @@ func _connect_regions() -> void:
 				_add_junction(con)
 
 		connectors = new_connectors
-	
-	print("Regions connected.")
-
 
 func _add_junction(pos: Vector2i) -> void:
-	_carve(pos)
-	# if (rng.oneIn(4)) {
-	# 	setTile(pos, rng.oneIn(3) ? Tiles.openDoor : Tiles.floor);
-	# } else {
-	# 	setTile(pos, Tiles.closedDoor);
-	# }
+	_carve(pos, TileTypes.TYPES.FLOOR)
 
 func _remove_dead_ends() -> void:
 	var done: bool = false
-
-	var count: int = 0
-
 	while not done:
 		done = true
 	
@@ -227,14 +218,10 @@ func _remove_dead_ends() -> void:
 						exits += 1
 				if exits != 1: 
 					continue
-				else:
-					count += 1
-
 	
 				done = false;
 				_carve(pos, TileTypes.TYPES.WALL);
 
-	print("%d cells removed." % count)
 
 func _place_entities(room: Rect2i) -> void:
 	var nb_monsters: int = _rng.randi_range(0, max_monsters_per_room)
@@ -262,14 +249,14 @@ func _place_entities(room: Rect2i) -> void:
 
 func _add_rooms() -> void:
 	for i in range(nb_room_tries):
-		var size = _rng.randi_range(1, 3 + room_extra_size) * 2 + 1
-		# var rectangularity = _rng.randi_range(1, int(float(size) / 3))
+		var size = _rng.randi_range(min_room_size, max_room_size) * 2 + 1
+		var rectangularity = _rng.randi_range(0, int(float(size) / 2)) * 2
 		var width = size
 		var height = size
-		# if _rng.randf() < 0.5:
-		# 	width += rectangularity
-		# else:
-		# 	height += rectangularity
+		if _rng.randf() < 0.5:
+			width += rectangularity
+		else:
+			height += rectangularity
 		
 		var x = _rng.randi_range(0, floori(float(_bounds.size.x - width) / 2)) * 2 + 1
 		var y = _rng.randi_range(0, floori(float(_bounds.size.y - height) / 2)) * 2 + 1
@@ -310,4 +297,4 @@ func _carve_room(room: Rect2i) -> void:
 	var inner: Rect2i = room
 	for x in range(inner.position.x, inner.end.x):
 		for y in range(inner.position.y, inner.end.y):
-			_carve(Vector2i(x,y))
+			_carve(Vector2i(x,y), TileTypes.TYPES.FLOOR)
