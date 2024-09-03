@@ -222,31 +222,6 @@ func _remove_dead_ends() -> void:
 				done = false;
 				_carve(pos, TileTypes.TYPES.WALL);
 
-
-func _place_entities(room: Rect2i) -> void:
-	var nb_monsters: int = _rng.randi_range(0, max_monsters_per_room)
-
-	for _i in nb_monsters:
-		var x: int = _rng.randi_range(room.position.x + 1, room.end.x - 1)
-		var y: int = _rng.randi_range(room.position.y + 1, room.end.y - 1)
-		var new_entity_position := Vector2i(x, y)
-
-		var can_place = true
-		for entity in _dungeon.entities:
-			if entity.grid_position == new_entity_position:
-				can_place = false
-				break
-		
-		if can_place:
-			var new_entity: Entity
-			if _rng.randf() < 0.8:
-				new_entity = Entity.new(_dungeon, new_entity_position, entity_types.slime)
-				pass
-			else:
-				new_entity = Entity.new(_dungeon, new_entity_position, entity_types.goblin)
-				pass
-			_dungeon.entities.append(new_entity)
-
 func _add_rooms() -> void:
 	for i in range(nb_room_tries):
 		var size = _rng.randi_range(min_room_size, max_room_size) * 2 + 1
@@ -276,6 +251,9 @@ func _add_rooms() -> void:
 		_start_region()
 
 		_carve_room(room)
+
+		if _rng.randf() < 0.25:
+			_place_entities(room)
 	
 func _start_region() -> void:
 	_current_region += 1
@@ -298,3 +276,27 @@ func _carve_room(room: Rect2i) -> void:
 	for x in range(inner.position.x, inner.end.x):
 		for y in range(inner.position.y, inner.end.y):
 			_carve(Vector2i(x,y), TileTypes.TYPES.FLOOR)
+
+func _place_entities(room: Rect2i) -> void:
+	var nb_monsters: int = _rng.randi_range(0, max_monsters_per_room)
+
+	for _i in nb_monsters:
+		var x: int = _rng.randi_range(room.position.x + 1, room.end.x - 1)
+		var y: int = _rng.randi_range(room.position.y + 1, room.end.y - 1)
+		var new_entity_position := Vector2i(x, y)
+
+		var can_place = true
+		for entity in _dungeon.entities:
+			if entity.grid_position == new_entity_position:
+				can_place = false
+				break
+		
+		if can_place:
+			var new_entity: Entity
+			if _rng.randf() < 0.8:
+				new_entity = Entity.new(_dungeon, new_entity_position, entity_types.slime)
+				pass
+			else:
+				new_entity = Entity.new(_dungeon, new_entity_position, entity_types.goblin)
+				pass
+			_dungeon.entities.append(new_entity)

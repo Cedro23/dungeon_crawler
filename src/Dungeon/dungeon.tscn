@@ -29,12 +29,8 @@ script = ExtResource("9_gumx2")
 map_width = 55
 map_height = 55
 nb_room_tries = 1000
-extra_connector_chance = null
-min_room_size = null
 max_room_size = 4
-winding_percent = null
 distance_between_connectors = 3
-max_monsters_per_room = null
 
 [node name="FieldOfView" type="Node" parent="DungeonMap"]
 script = ExtResource("7_6bvas")
