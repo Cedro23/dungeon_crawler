@@ -5,10 +5,10 @@ const directions = {
 	"move_down": Vector2i.DOWN,
 	"move_left": Vector2i.LEFT,
 	"move_right": Vector2i.RIGHT,
-	"move_up_left": Vector2i.UP + Vector2i.LEFT,
-	"move_up_right": Vector2i.UP + Vector2i.RIGHT,
-	"move_down_left": Vector2i.DOWN + Vector2i.LEFT,
-	"move_down_right": Vector2i.DOWN + Vector2i.RIGHT,
+	# "move_up_left": Vector2i.UP + Vector2i.LEFT,
+	# "move_up_right": Vector2i.UP + Vector2i.RIGHT,
+	# "move_down_left": Vector2i.DOWN + Vector2i.LEFT,
+	# "move_down_right": Vector2i.DOWN + Vector2i.RIGHT,
 }
 
 func get_action(player: Entity) -> Action:

@@ -61,6 +61,7 @@ func unregister_blocking_entity(entity: Entity) -> void:
 
 func setup_pathfinding() -> void:
 	pathfinder = AStarGrid2D.new()
+	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinder.region = Rect2i(0, 0, width, height)
 	pathfinder.update()
 	for y in height:

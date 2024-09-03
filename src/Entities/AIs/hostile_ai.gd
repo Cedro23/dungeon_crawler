@@ -11,7 +11,7 @@ func get_action(entity: Entity, target: Entity) -> Action:
 	var map_data: DungeonMapData = entity.map_data
 	var target_grid_position: Vector2i = target.grid_position
 	var offset: Vector2i = target_grid_position - entity.grid_position
-	var distance: int = max(abs(offset.x), abs(offset.y))
+	var distance: float = Grid.distance_to(target_grid_position, entity.grid_position) # max(abs(offset.x), abs(offset.y))
 
 	if map_data.get_tile(entity.grid_position).is_in_view:
 		if distance <= 1:
