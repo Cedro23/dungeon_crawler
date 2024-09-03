@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Dungeon/dungeon_manager.gd" id="1_ihs3x"]
 [ext_resource type="Script" path="res://src/Dungeon/EventHandlers/input_handler.gd" id="2_w6u0r"]
-[ext_resource type="Script" path="res://src/Dungeon/EventHandlers/main_game_input_handler.gd" id="3_mwp7w"]
+[ext_resource type="Script" path="res://src/Dungeon/EventHandlers/dungeon_input_handler.gd" id="3_rtuhc"]
 [ext_resource type="Script" path="res://src/Dungeon/EventHandlers/game_over_input_handlers.gd" id="4_ge8lu"]
 [ext_resource type="Script" path="res://src/Utils/debug.gd" id="4_vku7l"]
 [ext_resource type="Script" path="res://src/Dungeon/DungeonMap/dungeon_fov.gd" id="7_6bvas"]
@@ -16,7 +16,7 @@ script = ExtResource("1_ihs3x")
 script = ExtResource("2_w6u0r")
 
 [node name="DungeonInputHandler" type="Node" parent="InputHandler"]
-script = ExtResource("3_mwp7w")
+script = ExtResource("3_rtuhc")
 
 [node name="GameOverInputHandler" type="Node" parent="InputHandler"]
 script = ExtResource("4_ge8lu")
