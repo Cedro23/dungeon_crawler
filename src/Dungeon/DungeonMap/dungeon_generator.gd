@@ -58,7 +58,7 @@ func generate(player: Entity):
 	_remove_dead_ends()
 
 	# Select starting room for player
-	player.grid_position = _rooms[_rng.randi() % len(_rooms)].get_center()
+	player.grid_position = _rooms.pick_random().get_center()
 	player.map_data = _dungeon
 
 
@@ -91,7 +91,7 @@ func _grow_maze(start: Vector2i) -> void:
 			if unmade_cells.has(last_direction) and _rng.randi_range(0, 100) > winding_percent:
 				direction = last_direction
 			else:
-				direction = unmade_cells[randi() % len(unmade_cells)]
+				direction = unmade_cells.pick_random()
 
 			_carve(cell + direction, TileTypes.TYPES.FLOOR)
 			_carve(cell + direction * 2, TileTypes.TYPES.FLOOR)
@@ -145,9 +145,8 @@ func _connect_regions() -> void:
 	open_regions = ArrayUtils.array_unique(open_regions)
 
 	while len(open_regions) > 1:
-
 		# Vector2i chosen randomly in connectors
-		var connector = connectors[_rng.randi() % len(connectors)]	
+		var connector = connectors.pick_random()
 
 		# Carve the connection
 		_add_junction(connector)
@@ -157,7 +156,8 @@ func _connect_regions() -> void:
 		var merged_regions = []
 		for region in connector_regions[connector]:
 			merged_regions.append(merged[region])
-		var dest = merged_regions.pop_front()
+		var dest = merged_regions.pick_random()
+		merged_regions.erase(dest)
 		var sources = merged_regions
 
 		# Merge all of the affected regions. We have to look at *all* of the
