@@ -29,6 +29,8 @@ var map_data: DungeonMapData
 
 var components: Dictionary = {}
 
+var tween: Tween
+
 func _init(_map_data: DungeonMapData, start_position: Vector2i, entity_definition: EntityDefinition) -> void:
 	centered = false
 	grid_position = start_position

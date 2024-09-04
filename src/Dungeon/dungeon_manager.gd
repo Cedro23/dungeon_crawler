@@ -7,7 +7,6 @@ var player: Entity
 @onready var map: DungeonMap = $DungeonMap
 @onready var camera: Camera2D = $Camera2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = Entity.new(null, Vector2i.ZERO, player_definition)
@@ -21,9 +20,13 @@ func _physics_process(_delta: float) -> void:
 	if action:
 		var previous_player_position: Vector2i = player.grid_position
 		action.perform()
+		
+		await get_tree().create_timer(0.2).timeout
 		_handle_ais_turn()
+		
 		if player.grid_position != previous_player_position:
 			map.update_fov(player.grid_position)
+
 
 
 func _handle_ais_turn() -> void:

@@ -23,6 +23,8 @@ func attack(attacker: Entity, target: Entity) -> void:
 		var is_crit = _rng.randf() <= attack_component.base_crit_chance
 		var raw_dmg: int = _calc_raw_damage(attack_component, is_crit)
 		var mitigated_dmg: int = _calc_mitigated_damage(raw_dmg, target_def)
+
+		_animate_melee_attack(attacker, target, is_crit)
 		_display_damage_number(mitigated_dmg, target.position, attacker.position, is_crit)
 			
 		var damage_system = DamageSystem.new(attacker)
@@ -40,14 +42,24 @@ func _calc_raw_damage(attack_comp: AttackComponent, is_crit: bool) -> int:
 func _calc_mitigated_damage(raw_dmg: int, armor: int) -> int:
 	var mitigated_dmg: int
 	if armor >= 0:
-		mitigated_dmg = roundi(raw_dmg * (100.0 / (100.0 + armor)))
+		mitigated_dmg = floori(raw_dmg * (100.0 / (100.0 + armor)))
 	else:
-		mitigated_dmg = roundi(raw_dmg * (2 - (100.0 / (100.0 - armor))))
+		mitigated_dmg = floori(raw_dmg * (2 - (100.0 / (100.0 - armor))))
 
 	if mitigated_dmg < 0:
 		mitigated_dmg = 0
 
 	return mitigated_dmg
+
+func _animate_melee_attack(attacker: Entity, target: Entity, _is_crit: bool) -> void:
+	if attacker.tween:
+		attacker.tween.kill()
+	attacker.tween = attacker.create_tween()
+	var initial_pos = attacker.position
+	attacker.tween.tween_property(attacker, "position", target.position, 0.1)
+	attacker.tween.tween_property(attacker, "position", initial_pos, 0.1)
+	
+
 
 func _display_damage_number(amount: int, start_pos: Vector2, attacker_pos: Vector2, is_crit: bool):
 	var new_scene: Node = dmg_number_scene.instantiate()

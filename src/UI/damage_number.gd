@@ -10,6 +10,9 @@ func display(amount: int, start_pos: Vector2, direction: Vector2, duration: floa
 	z_index = 10
 	text = str(amount) if amount > 0 else "Miss"
 	
+	modulate = Color(1, 0.612, 0)
+	if amount <= 0:
+		modulate = Color.GRAY	
 	
 	position = start_pos
 	var movement = (direction / 2).rotated(_rng.randf_range(-1, 1))
@@ -18,7 +21,7 @@ func display(amount: int, start_pos: Vector2, direction: Vector2, duration: floa
 	tween.tween_property(self, "position", position + movement, duration/4 if is_crit else duration/2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(self, "label_settings:font_color:a", 1.0, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
-	if is_crit:
+	if is_crit and amount > 0:
 		text += "!"
 		modulate = Color.RED
 		pivot_offset = size / 2

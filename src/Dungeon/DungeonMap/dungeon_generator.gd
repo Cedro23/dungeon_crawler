@@ -252,7 +252,7 @@ func _add_rooms() -> void:
 
 		_carve_room(room)
 
-		if _rng.randf() < 0.25:
+		if _rng.randf() < 1:
 			_place_entities(room)
 	
 func _start_region() -> void:
