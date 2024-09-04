@@ -10,7 +10,7 @@ static func world_to_grid(world_pos: Vector2i) -> Vector2i:
 	var grid_pos: Vector2i = world_pos / tile_size
 	return grid_pos
 
-static func distance_to(from: Vector2i, to: Vector2i) -> float:
+static func distance_between(from: Vector2i, to: Vector2i) -> float:
 	var dx: float  = to.x - from.x
 	var dy: float  = to.y - from.y
 

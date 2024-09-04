@@ -175,7 +175,7 @@ func _connect_regions() -> void:
 		var new_connectors: Array[Vector2i] = []
 		for con in connectors:
 			# Don't allow connectors right next to each other.
-			if Grid.distance_to(con, connector) > distance_between_connectors:
+			if Grid.distance_between(con, connector) > distance_between_connectors:
 				new_connectors.append(con)
 				continue
 			
